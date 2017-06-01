@@ -8,11 +8,12 @@
     <title>Quest</title>
 </head>
 <body>
-    <h1>{{ $room->title }}</h1>
-    <p>{{ $room->description }}
+    <h1>{{ $room["title"] }}</h1>
+    <p>{{ $room["description"] }}
     </p>
-    @foreach($room->actions as $key => $value)
-        <a href="{{$value}}">{{$key}}</a><br>
+    @foreach($room["actions"] as $key => $value)
+        <a href="{{$value}}">{{$key}}</a>
+        <br>
     @endforeach
 </body>
 </html>
