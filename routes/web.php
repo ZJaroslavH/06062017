@@ -1,16 +1,67 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+$rooms =[
+    "1" => [
+        "title" => "Комната",
+        "description" => "Комната. Твоя. Воняет. Зато твоя собственная",
+        "actions" => [
+            "Выйти из комнаты" => "/room/2",
+            "Продолжить лежать на кроватке" => "/room/3",
+            "Покушать" => "/room/3"
+        ]
+    ],
+    "2" => [
+        "title" => "Улица",
+        "description" => "Улица. Не твоя. Воняет. Дома было лучше",
+        "actions" => [
+            "" => "/room/",
+            "" => "/room/",
+            "" => "/room/"
+        ]
+    ],
+    "3" => [
+        "title" => "Комната",
+        "description" => "Ничего не произошло. Ты остался дома и остался жив. Поздравляю. ТЫ ПОБЕДИЛ!",
+        "actions" => [
+            "" => "",
+        ]
+    ]
+    ];
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::get("/room/{id}", function ($id) {
+    $rooms =[
+        "1" => [
+            "title" => "Комната",
+            "description" => "Комната. Твоя. Воняет. Зато твоя собственная",
+            "actions" => [
+                "Выйти из комнаты" => "/room/2",
+                "Продолжить лежать на кроватке" => "/room/3",
+                "Покушать" => "/room/3"
+            ]
+        ],
+        "2" => [
+            "title" => "Улица",
+            "description" => "Улица. Не твоя. Воняет. Дома было лучше",
+            "actions" => [
+                "1" => "/room/2",
+                "2" => "/room/2",
+                "3" => "/room/2"
+            ]
+        ],
+        "3" => [
+            "title" => "Комната",
+            "description" => "Ничего не произошло. Ты остался дома и остался жив. Поздравляю. ТЫ ПОБЕДИЛ!",
+            "actions" => [
+                "1" => "/room/2",
+            ]
+        ]
+    ];
+    $room = $rooms[$id];
+   return view("quest", ["room" => $room]);
+});
+
+Route::get("/", function () {
+    return redirect()->route("/room", ["id" => 1]);
 });
